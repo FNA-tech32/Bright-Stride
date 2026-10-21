@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Nervous System Check for Leaders · Bright Mind Academy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Free self-check for leaders. 12 statements, 4 areas, 10 minutes. Bright Mind Academy.">
+<style>
+  :root{--cream:#f5efe4;--ink:#2c3a30;--terra:#a35d3a;--gold:#b8924a;--card:#ffffff;--muted:#7a7268}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;background:var(--cream);color:var(--ink);line-height:1.55;font-size:16px}
+  .ns-wrap{max-width:680px;margin:0 auto;padding:32px 20px}
+  .ns-eyebrow{font-size:12px;font-weight:700;letter-spacing:2.5px;color:var(--terra);text-transform:uppercase;margin-bottom:8px}
+  h1{font-family:Georgia,serif;font-size:32px;font-weight:400;font-style:italic;line-height:1.2;margin-bottom:14px}
+  .ns-lead{font-size:17px;color:#5a5147;margin-bottom:28px;line-height:1.55}
+  .ns-card{background:var(--card);border:1px solid rgba(0,0,0,0.08);border-radius:8px;padding:24px;margin-bottom:18px}
+  .ns-q{font-weight:600;margin-bottom:14px;font-size:16px}
+  .ns-scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:8px}
+  .ns-scale label{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:var(--muted);padding:10px 4px;border:1px solid rgba(0,0,0,0.08);border-radius:6px}
+  .ns-scale label:hover{border-color:var(--terra);background:rgba(184,146,74,0.08)}
+  .ns-scale input{accent-color:var(--terra)}
+  .ns-scale-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px;padding:0 4px}
+  .ns-btn{background:var(--terra);color:#fff;border:none;padding:14px 24px;border-radius:6px;font-weight:600;cursor:pointer;font-size:15px;width:100%;margin-top:12px}
+  .ns-btn:hover{background:#864424}
+  .ns-result{padding:24px;background:var(--card);border-left:4px solid var(--gold);border-radius:6px;margin-top:24px;display:none}
+  .ns-result.show{display:block}
+  .ns-result h2{font-family:Georgia,serif;font-style:italic;font-size:24px;margin-bottom:8px}
+  .ns-score{font-size:48px;font-weight:300;color:var(--terra);margin:8px 0}
+  .ns-zone{font-size:16px;font-weight:600;margin-bottom:12px}
+  .ns-tools{margin-top:16px;font-size:14px;line-height:1.6}
+  .ns-tools li{margin:6px 0 6px 22px}
+  .ns-foot{text-align:center;margin-top:32px;padding-top:24px;border-top:1px solid rgba(0,0,0,0.08);font-size:13px;color:var(--muted)}
+  .ns-foot a{color:var(--terra);text-decoration:none;font-weight:500}
+  .ns-foot a:hover{text-decoration:underline}
+  @media(max-width:480px){h1{font-size:26px}.ns-scale label{padding:8px 2px;font-size:11px}}
+</style>
+</head>
+<body>
+<div class="ns-wrap">
+  <div class="ns-eyebrow">Self-check · 10 min</div>
+  <h1>Nervous System Check for Leaders</h1>
+  <p class="ns-lead">12 statements from work and everyday life. Four areas. Mark how much each statement applies to you.</p>
+  <form id="nsForm" novalidate>
+    <div id="nsQuestions"></div>
+    <button type="submit" class="ns-btn">Show results</button>
+  </form>
+  <div id="nsResult" class="ns-result" aria-live="polite">
+    <h2>Your score</h2>
+    <div class="ns-score" id="nsScoreNum"></div>
+    <div class="ns-zone" id="nsZone"></div>
+    <div id="nsZoneText"></div>
+    <div class="ns-tools">
+      <strong>Three mini-tools (60 seconds each):</strong>
+      <ul>
+        <li><strong>Breathing:</strong> Inhale for 4 seconds, exhale for 6–8 seconds, 8 breaths.</li>
+        <li><strong>Grounding:</strong> Feet flat, press heel then ball of the foot, 6 times per side.</li>
+        <li><strong>Voice check before a meeting:</strong> Say one sentence out loud. Notice pitch and pace.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ns-foot">
+    <p>Bright Mind Academy</p>
+    <p style="margin-top:6px">Email: <a href="mailto:admissions@brightmindacademy.com">admissions@brightmindacademy.com</a></p>
+    <p style="margin-top:4px">Phone: <a href="tel:+15550143920">+1 (555) 014-3920</a></p>
+    <p style="margin-top:6px;font-size:12px">Open-source widget under the MIT License · embeddable via iframe</p>
+  </div>
+</div>
+<script>
+(function(){
+  var QUESTIONS = [
+    {area:"Stress reactivity", q:"I get angry or impatient in meetings faster than I did 6 months ago."},
+    {area:"Stress reactivity", q:"I make decisions more reflexively instead of taking time."},
+    {area:"Stress reactivity", q:"When asked critical questions, I defend myself instead of checking the facts."},
+    {area:"Recovery", q:"Weekends barely restore my energy anymore."},
+    {area:"Recovery", q:"I wake up between 3 and 5 a.m. with a full head."},
+    {area:"Recovery", q:"Time off feels like just another appointment."},
+    {area:"Relationship clarity", q:"Topics that mattered to me 2 years ago no longer matter."},
+    {area:"Relationship clarity", q:"I keep an inner distance from people who are close to me."},
+    {area:"Relationship clarity", q:"I listen less carefully and more often just to reply."},
+    {area:"Embodiment", q:"I have jaw tension in the morning."},
+    {area:"Embodiment", q:"My breath does not reach all the way down."},
+    {area:"Embodiment", q:"Raised shoulders are the default, not the exception."}
+  ];
+  var SCALE_LABELS = ["Does not apply","Mostly not","Sometimes","Often","Fully applies"];
+  var container = document.getElementById('nsQuestions');
+  QUESTIONS.forEach(function(item, idx) {
+    var card = document.createElement('div');
+    card.className = 'ns-card';
+    card.innerHTML = '<div class="ns-q">' + (idx+1) + '. ' + item.q + '</div><div class="ns-scale">' +
+      [0,1,2,3,4].map(function(v){ return '<label><input type="radio" name="q'+idx+'" value="'+v+'" required><span>'+v+'</span></label>'; }).join('') +
+      '</div><div class="ns-scale-meta"><span>'+SCALE_LABELS[0]+'</span><span>'+SCALE_LABELS[4]+'</span></div>';
+    container.appendChild(card);
+  });
+  document.getElementById('nsForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var score = 0, answered = 0;
+    QUESTIONS.forEach(function(_, idx){
+      var checked = document.querySelector('input[name="q'+idx+'"]:checked');
+      if (checked) { score += parseInt(checked.value, 10); answered++; }
+    });
+    if (answered < QUESTIONS.length) { alert('Please answer all '+QUESTIONS.length+' questions.'); return; }
+    var zone, zoneText;
+    if (score <= 16) { zone = "In flow"; zoneText = "Your nervous system is mostly regulated. Keep the practices that help you. Routine before intensity."; }
+    else if (score <= 32) { zone = "Tense but functional"; zoneText = "Activation is rising, and you are still functioning. This is the moment for a short daily practice. Do not wait until it tips over."; }
+    else { zone = "Past the pain threshold"; zoneText = "Your system is stuck in chronic activation or shutdown. Talk with someone (a coach, your doctor, or a therapist). Do not sort this out alone."; }
+    document.getElementById('nsScoreNum').textContent = score + ' / 48';
+    document.getElementById('nsZone').textContent = '→ ' + zone;
+    document.getElementById('nsZoneText').textContent = zoneText;
+    document.getElementById('nsResult').classList.add('show');
+    document.getElementById('nsResult').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+})();
+</script>
+</body>
+</html>
